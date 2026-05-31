@@ -1,9 +1,7 @@
 cs50
-flask
-flask_session
-flask_mail
-tempfile
-helpers
-werkzeug.security
-datetime
+Flask
+Flask-Session
+Flask-Mail
 pytz
+python-dotenv
+inflect

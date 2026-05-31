@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -11,19 +12,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import date, timedelta, datetime
 from pytz import timezone
 
+load_dotenv("email_conf.env")
+
 # Configure application
 app = Flask(__name__)
 
 # Configure mail
 # -----
-app.config['MAIL_DEFAULT_SENDER'] = "mybarbershopapp39@gmail.com"
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get("MAIL_DEFAULT_SENDER")
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = "mybarbershopapp39@gmail.com"
-app.config['MAIL_PASSWORD'] = "dxrtfiwcqqjyzvxg"
+app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
 
 # app.config['MAIL_SUPPRESS_SEND'] = True
 
