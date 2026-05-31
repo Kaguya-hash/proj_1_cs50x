@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-from flask_session import Session
+#from flask_session import Session
 from flask_mail import Mail, Message
 from tempfile import mkdtemp
 
@@ -16,6 +16,8 @@ load_dotenv("email_conf.env")
 
 # Configure application
 app = Flask(__name__)
+
+app.config["SECRET_KEY"] = "something_secret"
 
 # Configure mail
 # -----
@@ -44,8 +46,8 @@ app.jinja_env.filters["rate_to_name"] = rate_to_name
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+#app.config["SESSION_TYPE"] = "filesystem"
+#Session(app)
 
 # Configure CS50 Library to use SQLite database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
