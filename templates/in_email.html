@@ -1,0 +1,17 @@
+{% extends "signature.html" %}
+
+<!--Add main block to signature.html-->
+{% block main %}
+    <div style="font-size: 12px;">
+        <!--User name-->
+        <p>Hi {{ name }},</p>
+
+        <!--Show registered style, its date and time-->
+        <div>
+            Your appoinment for "{{ style }}" in {{ date }} at {{ time | time }} is registered in the system! <br>
+            Best decision of your life
+        </div>
+
+        <p>Pleasure to speak with you, <br>Slavoj Žižek (obviously)</p>
+    </div>
+{% endblock %}

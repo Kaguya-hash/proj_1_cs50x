@@ -1,0 +1,22 @@
+{% extends "signature.html" %}
+
+<!--Add main block to signature.html-->
+{% block main %}
+    <div style="font-size: 12px;">
+        <p>Hi {{ name }},</p>
+
+        <div>
+            welcome to our store. <br>
+            Have fun! <br>
+            <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" style="text-decoration: none; color: black;">Link to best haircut in the world</a>
+        </div>
+
+        <p>Pleasure to speak with you, <br>Slavoj Žižek (obviously)</p>
+
+        <h4>Your Info:</h4>
+        <dl>
+            <dt>Number: {{ number }}</dt>
+            <dt>Password: {{ password }}</dt>
+        </dl>
+    </div>
+{% endblock %}

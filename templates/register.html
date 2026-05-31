@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Register
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+            <small class="fw-light fs-9">Just one word [Max: 20]</small>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="email" placeholder="Email" type="text">
+            <small class="fw-light fs-9">user@gmail.com</small>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="number" placeholder="Number" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+            <small class="fw-light fs-9">Capital and lower letters, number, Min&Max: [8, 20]</small>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Password (again)" type="password">
+        </div>
+        <button class="btn btn-light" type="submit">Register</button>
+    </form>
+{% endblock %}

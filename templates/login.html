@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Log In
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <form action="/login" method="post">
+        <!--Input username-->
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <!--Input password-->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-light" type="submit">Log In</button>
+    </form>
+    <p>
+        <h6>
+            <!--If forgot password-->
+            <a href="/password" style="text-decoration: none; color: black;">Forgot Password</a>
+        </h6>
+    </p>
+{% endblock %}

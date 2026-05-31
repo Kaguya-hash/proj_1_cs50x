@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Rates
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <!--Table with latest appointment of each style (rated or not)-->
+    <table class="table table-striped">
+        <caption>Last appointments by type</caption>
+        <thead>
+            <tr>
+                <th class="text-start">Day & Time</th>
+                <th class="text-start">Type of appointment</th>
+                <th class="text-end"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Shot the appoinments, with -->
+            {% for appoint in info %}
+            <tr>
+                <td class="text-start">{{ appoint["date"] }} {{ appoint["time"] | time}}</td>
+                <td class="text-start">{{ appoint["name"] }}</td>
+                <td class="text-end">
+                    <form action="?" method="post">
+                        <div class="mb-3">
+                            {% if appoint["rate_id"] %}
+                                Rated already: {{ rates_name[appoint["rate"]] }} ({{ appoint["rate"] }})
+                            {% endif %}
+                            <select name="rate">
+                                <option disabled="" selected="">-</option>
+                                {% for rate, type in rates_name.items() %}
+                                    <option value="{{ rate }}">{{ type }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" name="appoint_id" value="{{ appoint["id"] }}">
+                            <button type="submit">Rate it</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+{% endblock %}
+

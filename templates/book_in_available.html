@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Book_In: Available
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+
+    <!--Show style name-->
+    <p>
+        <h4>For {{ style_info["name"] }} <small>({{ style_info["duration"] | time }})</small></h4>
+        <small>Schedule just in quarters of an hour</small>
+    </p>
+    <div class="accordion" id="accordionExample">
+        <!--Show available days-->
+        {% for day in info %}
+        <div class="accordion-item">
+            <!--day[2] has a number to be converted in the specific word to put in each column (formats required by bootstrap)-->
+            <h2 class="accordion-header" id="{{ day[2] | heading_number }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="{{ day[2] | hash_collapse_number }}" aria-expanded="false"
+                    aria-controls="{{ day[2] | collapse_number }}">
+                    <!--Show the day-->
+                    {{ day[1] }}
+                </button>
+            </h2>
+            <!--day[2] has a number to be converted in the specific word to put in each column (formats required by bootstrap)-->
+            <div id="{{ day[2] | collapse_number }}" class="accordion-collapse collapse"
+                aria-labelledby="{{ day[2] | heading_number }}" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-start">From</th>
+                                <th class="text-start">To</th>
+                                <th class="text-end"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Show each available space-->
+                            {% for available in day[0] %}
+                            <tr>
+                                <!--Show start and end time-->
+                                <td class="text-start">{{ available[0] | time }}</td>
+                                <td class="text-start">{{ (available[1] - style_info["duration"]) | time }}</td>
+                                <!--User can schedule time with the parameters, just quarters of an hour, passing time, day and styleID-->
+                                <td class="text-end">
+                                    <form action="/book_in_validation" method="post">
+                                        <div class="mb-3">
+                                            <input type="hidden" name="style_id" value="{{ style_info["id"] }}">
+                                            <input type="hidden" name="day" value="{{ day[1] }}">
+                                            <input type="time" name="time" step="900" min="{{ available[0] | time }}"
+                                                max="{{ (available[1] - style_info["duration"]) | time }}">
+                                            <input type="submit" value="Book it">
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

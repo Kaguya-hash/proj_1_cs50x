@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Menu
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <!--Table of diferent appointments-->
+    <table class="table table-striped">
+    <caption>Menu (Last Update: {{ last_update }})</caption>
+        <thead>
+            <tr>
+                <th class="text-start">Name</th>
+                <th class="text-start">Duration</th>
+                <th class="text-start">Price</th>
+                <th class="text-end">Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Show diferent types of appointment, with its names, durations, prices and rates-->
+            {% for type in info %}
+            <tr>
+                <td class="text-start">{{ type["name"] }}</td>
+                <td class="text-start">{{ type["duration"] | time }}</td>
+                <td class="text-start">{{ type["price"] | usd }}</td>
+                <th class="text-end">{{ type["rate"] | rate_to_name }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+    <!--Show nearest appointment, with its date, time, duration and style name, if it exists-->
+    {% if appointment %}
+        <div style="font-size: 12px">
+            <h5>Your next appointment:</h5>
+            <dl>
+                <dt>Date: {{ appointment[0]["date"] }}</dt>
+                <dt>Time: {{ appointment[0]["time"] | time }}</dt>
+                <dt>Duration: {{ appointment[0]["duration"] | time }}</dt>
+                <dt>Type: {{ appointment[0]["name"] }}</dt>
+            </dl>
+        </div>
+    <!--Else, show nothing-->
+    {% else %}
+        <div style="font-size: 12px">
+            <p>Don't have any next appoinment (schedule one :D)</p>
+        </div>
+    {% endif %}
+    <div>
+        <!--Link to change password-->
+        <form action="/password" method="get">
+            <button class="btn btn-light btn-sm" type="submit">Change password</button>
+        </form>
+        <!--Link to change email-->
+        <form action="/email" method="get">
+            <button class="btn btn-light btn-sm" type="submit">Change email</button>
+        </form>
+        <!--Link to change number-->
+        <form action="/number" method="get">
+            <button class="btn btn-light btn-sm" type="submit">Change number</button>
+        </form>
+    </div>
+{% endblock %}

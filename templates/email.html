@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Email
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <form action="/email" method="post">
+        <!--Input email-->
+        <div class="mb-3">
+            <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="email" placeholder="New Email" type="text">
+        </div>
+        <button class="btn btn-light" type="submit">Complete</button>
+    </form>
+{% endblock %}

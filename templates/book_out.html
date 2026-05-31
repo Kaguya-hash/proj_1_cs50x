@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Book_Out
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+
+    <!--This code was done to read the list less times-->
+    {% if info_size == 0 %}
+
+        <!--If no appointments-->
+        <p>No appointments for the future</p>
+
+    {% else %}
+
+        <!--Display appointments group by dates in tables-->
+        {% for i in range(0, info_size) %}
+
+            <!--If beggining of list start a table-->
+            {% if i == 0 %}
+                <p></p>
+                <table class="table table-striped">
+                    <!--Show date as table title-->
+                    <caption>{{ info[i]["date"] }}</caption>
+                    <thead>
+                        <tr>
+                            <th class="text-start">Time</th>
+                            <th class="text-start">Duration</th>
+                            <th class="text-start">Type of service</th>
+                            <th class="text-end"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            <!--If date has changed in relation with the previous date, end previous table and creat a new one-->
+            {% elif info[i]["date"] != info[i - 1]["date"] %}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
+                <p></p>
+                <table class="table table-striped">
+                    <!--Show date as table title-->
+                    <caption>{{ info[i]["date"] }}</caption>
+                    <thead>
+                        <tr>
+                            <th class="text-start">Time</th>
+                            <th class="text-start">Duration</th>
+                            <th class="text-start">Type of service</th>
+                            <th class="text-end"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            {% endif %}
+
+            <!--Display info about appoinment-->
+            <tr>
+                <td class="text-start">{{ info[i]["time"] | time}}</td>
+                <td class="text-start">{{ info[i]["duration"] | time }}</td>
+                <td class="text-start">{{ info[i]["name"] }}</td>
+                <!--Allow user to delete appointment, passing appointmentID-->
+                <td class="text-end">
+                    <form action="/book_out" method="post">
+                        <input type="hidden" name="appoint_id" value="{{ info[i]["id"] }}">
+                        <button class="btn btn-light" type="submit">Mark off</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!--If end of list, close last table-->
+            {% if i + 1 == info_size %}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

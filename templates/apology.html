@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Apology
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+
+    <!-- Error code -->
+    <h1 class="mb-4">
+        Error {{ top }}
+    </h1>
+
+    <!-- Angry cat image -->
+    <img
+        src="{{ url_for('static', filename='Angry-Cat-PNG-Picture.png') }}"
+        alt="Angry Cat"
+        class="img-fluid border rounded mb-4"
+        style="max-width: 400px;"
+    >
+
+    <!-- Error message -->
+    <h3>
+        {{ bottom }}
+    </h3>
+
+{% endblock %}

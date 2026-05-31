@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Number
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+<form action="/number" method="post">
+    <!--Input new number-->
+    <div class="mb-3">
+        <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="number" placeholder="New Number" type="text">
+    </div>
+    <button class="btn btn-light" type="submit">Complete</button>
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "signature.html" %}
+
+<!--Add main block to signature.html-->
+{% block main %}
+    <div style="font-size: 12px;">
+        <!--User name-->
+        <p>Hi {{ name }},</p>
+
+        <!--Show new password of user-->
+        <div>
+            Here's your new password: {{ password }} <br>(if you want, you can change it again to what ever you want, just log in!)
+        </div>
+    </div>
+{% endblock %}

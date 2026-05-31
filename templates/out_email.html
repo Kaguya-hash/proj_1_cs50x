@@ -1,0 +1,16 @@
+{% extends "signature.html" %}
+
+<!--Add main block to signature.html-->
+{% block main %}
+    <div style="font-size: 12px;">
+        <!--User name-->
+        <p>Hi {{ name }},</p>
+
+        <!--Name of style, date and time of deleted appointment-->
+        <div>
+            Your appointment for "{{ style }}" in {{ date }} at {{ time | time }} is cancelled. <br>You made a bad decision!
+        </div>
+
+        <p>Pleasure to speak with you, <br>Slavoj Žižek (obviously)</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+<!--Add title to page-->
+{% block title %}
+    Book_In
+{% endblock %}
+
+<!--Add main block to layout.html-->
+{% block main %}
+    <!--Display date from which you can schedule from-->
+    <p>Just after {{ date }} <small>(tomorrow)</small></p>
+    <form action="/book_in" method="post">
+        <!--Input style-->
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" name="name">
+                <option disabled="" selected="">Style</option>
+                <!--Show multiple styles to choose-->
+                {% for type in info %}
+                    <option value="{{ type["name"] }}">{{ type["name"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <span>From</span>
+        <!--Input date_from-->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" type="date" name="date_from">
+        </div>
+        <span>To</span>
+        <!--Input date_to-->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" type="date" name="date_to">
+        </div>
+        <button class="btn btn-light" type="submit">Search for Spaces</button>
+    </form>
+{% endblock %}
