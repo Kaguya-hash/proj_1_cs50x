@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-#from flask_session import Session
+from flask_session import Session
 from flask_mail import Mail, Message
 from tempfile import mkdtemp
 
@@ -17,8 +17,6 @@ load_dotenv("email_conf.env")
 # Configure application
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "something_secret"
-
 # Configure mail
 # -----
 app.config['MAIL_DEFAULT_SENDER'] = os.environ.get("MAIL_DEFAULT_SENDER")
@@ -28,6 +26,7 @@ app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
 app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_TIMEOUT'] = 10
 
 # app.config['MAIL_SUPPRESS_SEND'] = True
 
@@ -46,8 +45,8 @@ app.jinja_env.filters["rate_to_name"] = rate_to_name
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
-#app.config["SESSION_TYPE"] = "filesystem"
-#Session(app)
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # Configure CS50 Library to use SQLite database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -228,7 +227,11 @@ def book_in_validation():
 
     message = Message("Appointment registered!", recipients=[info_user["email"]])
     message.html = render_template("in_email.html", name=info_user["username"], style=duration["name"], date=day, time=time)
-    mail.send(message)
+    
+    try:
+        mail.send(message)
+    except Exception as e:
+        print(e)
 
     # Redirect to main page through
     flash("Appointment registered successfully")
@@ -266,7 +269,11 @@ def book_out():
 
         message = Message("Appointment Deleted.", recipients=[info_appoint["email"]])
         message.html = render_template("out_email.html", name=info_appoint["username"], style=info_appoint["name"], date=info_appoint["date"], time=info_appoint["hour_minute"])
-        mail.send(message)
+        
+        try:
+            mail.send(message)
+        except Exception as e:
+            print(e)
 
         # Redirect to main page
         flash("Marked off successfully")
@@ -428,7 +435,11 @@ def register():
         # Send an email to show that user has been registered
         message = Message("You are registered!", recipients=[email])
         message.html = render_template("register_email.html", name=username, password=password, number=number)
-        mail.send(message)
+        
+        try:
+            mail.send(message)
+        except Exception as e:
+            print(e)
 
         # Redirect user to home page
         return redirect("/")
@@ -507,7 +518,11 @@ def password():
         # Send new password by email
         message = Message("New Password", recipients=[email])
         message.html = render_template("paassword_email.html", name=username, password=new_password)
-        mail.send(message)
+        
+        try:
+            mail.send(message)
+        except Exception as e:
+            print(e)
 
         # Render passworded.html
         return render_template("passworded.html")
@@ -544,9 +559,13 @@ def email():
         db.execute("UPDATE users SET email = ? WHERE id = ?;", email, session["user_id"])
 
         # Send an email to show that user has been registered
-        message = Message("Email chenged!", recipients=[email])
+        message = Message("Email changed!", recipients=[email])
         message.html = render_template("email_email.html", name=info[0]["username"])
-        mail.send(message)
+        
+        try:
+            mail.send(message)
+        except Exception as e:
+            print(e)
 
         # redirect to main page
         flash("Email changed successfully")
