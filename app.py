@@ -48,7 +48,12 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///info.db")
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+db_path = os.path.join(BASE_DIR, "info.db")
+
+db = SQL(f"sqlite:///{db_path}")
+
+# db = SQL("sqlite:///info.db")
 
 # Ensure responses aren't cached
 @app.after_request
