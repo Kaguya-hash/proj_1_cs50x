@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 3. Set Flask and mail environment variables
- > ⚠️ **Important Note:** This project is in a very early experimental stage.
+ > ⚠️ **Important Note:** These credentials belong to a temporary, experimental email used for development. Hardcoding secrets isn't best practice for production, but it's fine for this demo.
 
 ```bash
 export FLASK_APP=app.py
