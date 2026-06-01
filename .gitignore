@@ -1,2 +1,3 @@
 venv/
 email_conf.env
+flask_session/

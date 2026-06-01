@@ -26,7 +26,6 @@ app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
 app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_TIMEOUT'] = 10
 
 # app.config['MAIL_SUPPRESS_SEND'] = True
 
@@ -228,10 +227,7 @@ def book_in_validation():
     message = Message("Appointment registered!", recipients=[info_user["email"]])
     message.html = render_template("in_email.html", name=info_user["username"], style=duration["name"], date=day, time=time)
     
-    '''try:
-        mail.send(message)
-    except Exception as e:
-        print(e)'''
+    # mail.send(message)
 
     # Redirect to main page through
     flash("Appointment registered successfully")
@@ -270,10 +266,7 @@ def book_out():
         message = Message("Appointment Deleted.", recipients=[info_appoint["email"]])
         message.html = render_template("out_email.html", name=info_appoint["username"], style=info_appoint["name"], date=info_appoint["date"], time=info_appoint["hour_minute"])
         
-        '''try:
-            mail.send(message)
-        except Exception as e:
-            print(e)'''
+        # mail.send(message)
 
         # Redirect to main page
         flash("Marked off successfully")
@@ -436,10 +429,7 @@ def register():
         message = Message("You are registered!", recipients=[email])
         message.html = render_template("register_email.html", name=username, password=password, number=number)
         
-        '''try:
-            mail.send(message)
-        except Exception as e:
-            print(e)'''
+        # mail.send(message)
 
         # Redirect user to home page
         return redirect("/")
@@ -519,10 +509,7 @@ def password():
         message = Message("New Password", recipients=[email])
         message.html = render_template("paassword_email.html", name=username, password=new_password)
         
-        '''try:
-            mail.send(message)
-        except Exception as e:
-            print(e)'''
+        # mail.send(message)
 
         # Render passworded.html
         return render_template("passworded.html")
@@ -562,10 +549,7 @@ def email():
         message = Message("Email changed!", recipients=[email])
         message.html = render_template("email_email.html", name=info[0]["username"])
         
-        '''try:
-            mail.send(message)
-        except Exception as e:
-            print(e)'''
+        # mail.send(message)
 
         # redirect to main page
         flash("Email changed successfully")
