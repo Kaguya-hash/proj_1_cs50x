@@ -35,6 +35,7 @@ pip install -r requirements.txt
 ```
 
 3. Set Flask and mail environment variables
+ > ⚠️ **Important Note:** This project is in a very early experimental stage.
 
 ```bash
 export FLASK_APP=app.py
@@ -42,9 +43,6 @@ export MAIL_DEFAULT_SENDER=mybarbershopapp39@gmail.com
 export MAIL_USERNAME=mybarbershopapp39@gmail.com
 export MAIL_PASSWORD=dxrtfiwcqqjyzvxg
 ```
-
-[!NOTE]
-These credentials belong to a temporary, experimental email used for development. Hardcoding secrets isn't best practice for production, but it's fine for this demo.
 
 4. Start the app
 
