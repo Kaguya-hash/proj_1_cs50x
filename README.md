@@ -43,6 +43,9 @@ export MAIL_USERNAME=mybarbershopapp39@gmail.com
 export MAIL_PASSWORD=dxrtfiwcqqjyzvxg
 ```
 
+[!NOTE]
+These credentials belong to a temporary, experimental email used for development. Hardcoding secrets isn't best practice for production, but it's fine for this demo.
+
 4. Start the app
 
 ```bash
