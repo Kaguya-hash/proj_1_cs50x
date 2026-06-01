@@ -13,7 +13,7 @@ A Flask-powered salon booking app built for appointment scheduling, user account
 ## Important deployment note
 This `main` branch keeps mail configuration hidden and does not expose local email credentials.
 
-⚠️ The other branch, `mail-rework`, was tested on Render but email delivery may still fail because Gmail/SMTP restrictions and cloud deployment policies can block outbound mail.
+⚠️ The other branch, `mail-rework`, contains full email configuration and supports password reset, booking confirmation, cancellation notices, and other mail flows. It works locally when you run it with the right env vars, but on Render Gmail/SMTP restrictions may still affect delivery.
 
 ## Live demo
 Visit the running site on Render:
